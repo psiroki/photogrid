@@ -136,6 +136,7 @@ function checkMulti() {
 
 function drawWithImage(fn, img, info) {
 	try {
+		info = info || { };
 		document.body.classList.add("busy");
 		var o = info && typeof info.Orientation === "number" ? info.Orientation : 0;
 		var s = enclose(img, 640);
