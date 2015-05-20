@@ -1,0 +1,96 @@
+html, body {
+	min-height: 100vh;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	padding: 8px;
+	font-family: 'Helvetica Neue', Tahoma, sans-serif;
+	font-size: 10pt;
+}
+
+.empty #dropDescription {
+	display: block;
+}
+
+.empty.busy #dropDescription {
+	opacity: 0.1;
+}
+
+#dropDescription, #dropNow, #busyDescription {
+	font-size: 18pt;
+	font-weight: bold;
+	color: #444;
+	text-shadow: 0px 1px 1px #ccc;
+	text-align: center;
+	display: none;
+	pointer-events: none;
+}
+
+#dropNow {
+	color: #fff;
+	text-shadow: 0px 1px 1px #000;
+}
+
+.view {
+	display: inline-block;
+	margin: 4px;
+	vertical-align: middle;
+}
+
+.view .card {
+	display: inline-block;
+	border: 1px solid #eee;
+	border-radius: 5px;
+	padding: 8px;
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.25);
+	margin: 8px 0px;
+	background: #fff;
+}
+
+.dragOver {
+	box-shadow: 0px 0px 32px rgba(0,0,0,0.5) inset;
+}
+
+.dragOver #dropNow {
+	display: block;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	line-height: 100vh;
+	background: #48f;
+	background-image: radial-gradient(ellipse, #48f, #36c, #248);
+	opacity: 0.8;
+}
+
+#dropNow span {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 150%;
+}
+
+.busy {
+	box-shadow: 0px 0px 32px red inset;
+}
+
+#busyDescription {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	right: 8px;
+	display: none;
+}
+
+.busy #busyDescription {
+	display: block;
+}
+
+#uploadField { display: none; }
+
+@media screen and (min-device-width: 0px) and (max-device-width: 1024px) {
+  #uploadField { display: block; }
+  #dropDescription { display: none; }
+}
