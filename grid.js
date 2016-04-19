@@ -278,14 +278,29 @@ function generate(f, exif) {
 }
 
 function saveAsJPG(canvas, filename) {
-	var canvasDataUrl = canvas.toDataURL("image/jpeg", 0.75);
+	var handleBlob = function(blob) {
+		var blobUrl = DOMURL.createObjectURL(blob);
+		var a = document.createElement("a");
+		a.href = blobUrl;
+		a.download = filename;
+		a.click();
+		DOMURL.revokeObjectURL(blobUrl);
+	}
+	
+	var format = "image/jpeg";
+	var quality = 0.75;
+	
+	if(typeof canvas.toBlob === "function") {
+		try {
+			canvas.toBlob(handleBlob, format, quality);
+			return;
+		} catch(e) {
+			// don't worry, we'll do it old school
+		}
+	}
+	var canvasDataUrl = canvas.toDataURL(format, quality);
 	var blob = dataURLToBlob(canvasDataUrl);
-	var blobUrl = DOMURL.createObjectURL(blob);
-	var a = document.createElement("a");
-	a.href = blobUrl;
-	a.download = filename;
-	a.click();
-	DOMURL.revokeObjectURL(blobUrl);
+	handleBlob(blob);
 }
 
 function isImageMime(s) {
